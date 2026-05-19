@@ -12,6 +12,12 @@ import requestRoutes from './routes/requestRoutes.js'
 
 dotenv.config()
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://blood-donor-app-nine.vercel.app',
+  process.env.FRONTEND_URL,
+].filter(Boolean)
+
 // Connect Database
 connectDB()
 
@@ -20,10 +26,7 @@ const app = express()
 // Proper CORS
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'https://blood-donor-app-nine.vercel.app'
-    ],
+    origin: allowedOrigins,
     credentials: true,
   })
 )
