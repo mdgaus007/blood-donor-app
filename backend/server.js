@@ -22,6 +22,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
+      'https://blood-donor-app-nine.vercel.app'
     ],
     credentials: true,
   })
