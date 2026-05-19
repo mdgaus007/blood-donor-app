@@ -36,7 +36,7 @@ const EmergencyRequests = () => {
   const fetchRequests = async () => {
     setLoading(true)
     try {
-      const { data } = await axios.get(`${API_URL}/api/auth/profile`)
+      const { data } = await axios.get(`${API_URL}/api/requests`)
       setRequests(data)
     } catch (error) {
       console.error('Failed to fetch requests', error)
@@ -57,7 +57,7 @@ const EmergencyRequests = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post( `${API_URL}/api/auth/profile`, formData)
+      await axios.post( `${API_URL}/api/requests`, formData)
       setShowForm(false)
       setFormData({
         patientName: '',

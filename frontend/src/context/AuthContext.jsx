@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = async (email, password) => {
-    const { data } = await axios.post(`${API_URL}/api/auth/profile`, {
+    const { data } = await axios.post(`${API_URL}/api/auth/login`, {
       email,
       password,
     })

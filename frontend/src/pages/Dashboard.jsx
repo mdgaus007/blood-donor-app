@@ -27,7 +27,7 @@ const Dashboard = () => {
     const fetchProfile = async () => {
       try {
         const { data } = await axios.get(
-          `${API_URL}/api/auth/profile`,
+          `${API_URL}/api/auth/donors/profile`,
         )
         setProfile(data)
         setFormData(data)
