@@ -6,6 +6,7 @@ import generateToken from '../utils/generateToken.js'
 // @access  Public
 export const registerUser = async (req, res) => {
   try {
+    console.log('REGISTER BODY:', req.body)
     const { name, email, password } = req.body
 
     const userExists = await User.findOne({ email })
@@ -32,6 +33,8 @@ export const registerUser = async (req, res) => {
       res.status(400).json({ message: 'Invalid user data' })
     }
   } catch (error) {
+    console.error('REGISTER ERROR:', error)
+    console.error(error.stack)
     res.status(500).json({ message: error.message })
   }
 }
@@ -89,7 +92,8 @@ export const loginUser = async (req, res) => {
     res.status(401).json({ message: 'Invalid email or password' })
 
   } catch (error) {
-    console.log(error)
+    console.error('LOGIN ERROR:', error)
+    console.error(error.stack)
     res.status(500).json({ message: error.message })
   }
 }
