@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import axios from 'axios'
 import { Save, UserCircle } from 'lucide-react'
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'https://blood-donor-api-zspg.onrender.com'
 
 axios.defaults.withCredentials = true;
 
@@ -26,9 +26,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.get(
-          `${API_URL}/api/auth/donors/profile`,
-        )
+        const { data } = await axios.get(`${API_URL}/api/donors/profile`)
         setProfile(data)
         setFormData(data)
       } catch (error) {

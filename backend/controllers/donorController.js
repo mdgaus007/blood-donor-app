@@ -5,6 +5,8 @@ import DonorProfile from '../models/DonorProfile.js'
 // @access  Private
 export const setupDonorProfile = async (req, res) => {
   try {
+    console.log('SETUP PROFILE BODY:', req.body)
+    console.log('SETUP PROFILE USER:', req.user)
     const {
       fullName,
       gender,
@@ -46,6 +48,8 @@ export const setupDonorProfile = async (req, res) => {
 
     res.status(200).json(profile)
   } catch (error) {
+    console.error('SETUP PROFILE ERROR:', error)
+    console.error(error.stack)
     res.status(500).json({ message: error.message })
   }
 }

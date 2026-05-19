@@ -22,7 +22,7 @@ export const registerUser = async (req, res) => {
     })
 
     if (user) {
-      generateToken(res, user._id)
+      generateToken(req, res, user._id)
       res.status(201).json({
         _id: user._id,
         name: user.name,
@@ -78,7 +78,7 @@ export const loginUser = async (req, res) => {
       console.log("PASSWORD MATCH:", isMatch)
 
       if (isMatch) {
-        generateToken(res, user._id)
+        generateToken(req, res, user._id)
 
         return res.json({
           _id: user._id,

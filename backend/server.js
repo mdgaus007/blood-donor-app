@@ -12,6 +12,7 @@ import requestRoutes from './routes/requestRoutes.js'
 
 dotenv.config()
 
+
 const allowedOrigins = [
   'http://localhost:5173',
   'https://blood-donor-app-nine.vercel.app',
@@ -22,6 +23,11 @@ const allowedOrigins = [
 connectDB()
 
 const app = express()
+
+// Enable trust proxy when running behind a proxy (e.g., Render, Heroku)
+if (process.env.NODE_ENV === 'production' || process.env.TRUST_PROXY === 'true') {
+  app.set('trust proxy', 1)
+}
 
 // Proper CORS
 app.use(

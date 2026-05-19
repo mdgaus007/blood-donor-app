@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Search, MapPin, Droplet, Phone, MessageCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, '') || 'https://blood-donor-api-zspg.onrender.com'
 
 axios.defaults.withCredentials = true;
 
