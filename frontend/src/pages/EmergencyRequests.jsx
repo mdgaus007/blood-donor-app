@@ -11,6 +11,9 @@ import {
   Plus,
 } from 'lucide-react'
 import { motion } from 'framer-motion'
+const API_URL = import.meta.env.VITE_API_URL
+
+axios.defaults.withCredentials = true;
 
 const EmergencyRequests = () => {
   const { user } = useAuth()
@@ -33,7 +36,7 @@ const EmergencyRequests = () => {
   const fetchRequests = async () => {
     setLoading(true)
     try {
-      const { data } = await axios.get('http://localhost:8000/api/requests')
+      const { data } = await axios.get(`${API_URL}/api/auth/profile`)
       setRequests(data)
     } catch (error) {
       console.error('Failed to fetch requests', error)
@@ -54,7 +57,7 @@ const EmergencyRequests = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:8000/api/requests', formData)
+      await axios.post( `${API_URL}/api/auth/profile`, formData)
       setShowForm(false)
       setFormData({
         patientName: '',

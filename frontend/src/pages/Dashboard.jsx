@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import axios from 'axios'
 import { Save, UserCircle } from 'lucide-react'
+const API_URL = import.meta.env.VITE_API_URL
+
+axios.defaults.withCredentials = true;
 
 const Dashboard = () => {
   const { user, logout } = useAuth()
@@ -24,7 +27,7 @@ const Dashboard = () => {
     const fetchProfile = async () => {
       try {
         const { data } = await axios.get(
-          'http://localhost:8000/api/donors/profile',
+          `${API_URL}/api/auth/profile`,
         )
         setProfile(data)
         setFormData(data)
@@ -50,7 +53,7 @@ const Dashboard = () => {
     setMessage('')
     try {
       const { data } = await axios.post(
-        'http://localhost:8000/api/donors/profile',
+        `${API_URL}/api/donors/profile`,
         formData,
       )
       setProfile(data)

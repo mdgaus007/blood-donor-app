@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
+const API_URL = import.meta.env.VITE_API_URL
+axios.defaults.withCredentials = true;
 
 const AuthContext = createContext()
 
@@ -12,13 +14,13 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   // Make axios include cookies
-  axios.defaults.withCredentials = true
+  // axios.defaults.withCredentials = true
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
         const { data } = await axios.get(
-          'http://localhost:8000/api/auth/profile',
+          `${API_URL}/api/auth/profile`,
         )
         setUser(data)
       } catch (error) {
@@ -32,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const login = async (email, password) => {
-    const { data } = await axios.post('http://localhost:8000/api/auth/login', {
+    const { data } = await axios.post(`${API_URL}/api/auth/profile`, {
       email,
       password,
     })
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     const { data } = await axios.post(
-      'http://localhost:8000/api/auth/register',
+      `${API_URL}/api/auth/register`,
       {
         name,
         email,
@@ -54,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = async () => {
-    await axios.post('http://localhost:8000/api/auth/logout')
+    await axios.post(`${API_URL}/api/auth/logout`)
     setUser(null)
   }
 

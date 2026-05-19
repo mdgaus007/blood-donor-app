@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Search, MapPin, Droplet, Phone, MessageCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
+const API_URL = import.meta.env.VITE_API_URL
+
+axios.defaults.withCredentials = true;
 
 const SearchDonors = () => {
   const [donors, setDonors] = useState([])
@@ -20,7 +23,7 @@ const SearchDonors = () => {
       if (filters.city) queryParams.append('city', filters.city)
 
       const { data } = await axios.get(
-        `http://localhost:8000/api/donors?${queryParams.toString()}`,
+      `${API_URL}/api/donors?${queryParams.toString()}`
       )
       setDonors(data)
     } catch (error) {
